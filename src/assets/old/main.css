@@ -1,0 +1,13 @@
+.ui-button{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.box{
+    background-color: lightgray;
+    border-radius: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+}

@@ -18,6 +18,7 @@
     "vite-plugin-solid": "^2.2.6"
   },
   "dependencies": {
+    "@solid-primitives/websocket": "0.0.100",
     "knopf.css": "^1.1.2",
     "solid-js": "^1.4.2"
   }

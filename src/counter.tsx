@@ -1,4 +1,5 @@
 import { Component, createSignal } from "solid-js";
+import createWebsocket from "@solid-primitives/websocket";
 // import 'knopf.css'
 // import "./bttn.css"
 // import "./main.css"
@@ -6,15 +7,31 @@ import { Component, createSignal } from "solid-js";
 
 
 function Counter(){
+    const [data, setData] = createSignal("");
+    const [connect, disconnect, send, state] = createWebsocket(
+      "wss://localhost:3001",
+      (msg: { data: any; }) => setData(msg.data),
+      (msg) => setData("Error"),
+      [],
+      5,
+      5000
+    );
+
     let [count, setCount] = createSignal(0);
     let addCount = () => {setCount(count() + 1)};
     let removeCount = () => {setCount(count() - 1)};
+    connect();
+    function handleClick(event: MouseEvent){
+        addCount();
+        send("Test");
+        console.log("Sent Message");
+    }
     
     return (
-        <div class="bg-sky-200 rounded-xl text-center p-5 my-10">
-            <h2 class="text-9xl">{count()}</h2>
-            <button class="bg-sky-600 rounded-xl p-2 pl-10 pr-10 mt-10 hover:bg-sky-500 transition-colors" onclick={addCount}>Add</button>
-        </div>
+            <div class="bg-sky-200 rounded-xl text-center p-5 my-10">
+                <h2 class="text-9xl">{count()}</h2>
+                <button class="bg-sky-600 rounded-xl p-2 pl-10 pr-10 mt-10 hover:bg-sky-500 transition-colors" onclick={addCount}>Add</button>
+            </div>
     )
 }
 

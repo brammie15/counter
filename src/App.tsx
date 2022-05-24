@@ -6,14 +6,14 @@ import Counter from './counter';
 
 const App: Component = () => {
   return (
-    <div>
+    <div class='flex flex-col h-screen'>
       <header class="bg-sky-500 flex justify-center">
         <div class='box'>
           <h1 class="text-5xl m-5">Click!</h1>
         </div>
       </header>
 
-      <main>
+      <main class="flex justify-center bg-pink-200 items-start h-screen">
         <Counter />
       </main>
     </div>

@@ -13,7 +13,7 @@ const App: Component = () => {
         </div>
       </header>
 
-      <main class="flex justify-center bg-pink-200 items-start h-screen">
+      <main class="flex justify-center bg-gray-900 items-start h-screen">
         <Counter />
       </main>
     </div>

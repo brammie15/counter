@@ -16,9 +16,9 @@ function Counter(){
         [3, "CLOSED"], ]); //DEV
 
     const [connect, disconnect, send, state] = createWebsocket(
-      "ws://95.111.230.236:80",
+      "wss://95.111.230.236:8080",
       (msg: { data: any; }) => handleMessage(msg.data),
-      (msg) => handleError(msg), //tbh i dont even handle it
+      (msg: Event) => handleError(msg), //tbh i dont even handle it
       [],
       5,
       5000
@@ -39,18 +39,17 @@ function Counter(){
             console.log("Not connected to server :/")
             return;
         }
-        console.log("Sending Click")
+        //console.log("Sending Click")
         send("INC"); //fuck the server
     }
     function handleMessage(message : string){
-        console.log("got: " + message);
+        //console.log("got: " + message);
         setCount(Number(message)); //cast to a number bc skience
     }
     function connectLog(){
         connect();
         console.log(state());
         if(state() == 1){
-            console.log("Connected");
             setConnected(true);
         }
     }
@@ -58,9 +57,7 @@ function Counter(){
         console.log("Error: " + error); //this doesnt work and tbh errors are overrated
     }
 
-    onMount(() => {
-        connectLog();
-    });
+    onMount(connectLog);
     onCleanup(() => {
         disconnect();
         setConnected(false);
